@@ -1,60 +1,43 @@
-const prompt = require("prompt-sync")()
+let email = document.querySelector(".input1");
+let password = document.querySelector(".input2");
+let nm = document.querySelector(".nm");
+let form = document.querySelector(".input");
 
+let hides = document.querySelectorAll(".hide");
 
-let name = prompt("Enter the name =");
-let weight = prompt("Enter the weight = ");
-let height = prompt("Eter the height = ");
-let age = prompt("Enter the age = ");
+form.addEventListener("submit", function(e){
+  e.preventDefault();
 
-let totalsteps = 0;
+  console.log(e);
 
-for (let i = 1; i < 8; i++) {
-    let steps = Number(prompt(`Enter the steps for a day ${i}`));
-    totalsteps = totalsteps + steps;
-}
+  let emailregex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  let passwordregex =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-
-function calculatebmi(weight, heightCM) {
-
-    let heightM = heightCM / 100;
-    let bmi = weight / (heightM * heightM);
-    return bmi;
-
-}
-
-console.log(calculatebmi(weight, height).toFixed(2));
-
-
-function averagesteps(steps) {
-    let avg = totalsteps / steps;
-    return avg
-
-}
-
-console.log(averagesteps(7).toFixed(0));
-
-let bmi = calculatebmi(weight, height);
-
-
-if (bmi < 18.5) {
-    console.log("underweight")
-}
-else if (bmi < 25) {
-    console.log("Healthy")
-}
-else if (bmi < 30) {
-    console.log("overweight")
-}
-else {
-    console.log("obese")
-}
-
-
-console.log("------ FITNESS REPORT ------");
-console.log("Name:", name);
-console.log("Age:", age);
-console.log("Total Steps:", totalsteps);
-console.log("averagesteps",averagesteps(7).toFixed(0));
-console.log("BMI:", bmi.toFixed(2));
+  if(nm.value.length > 2){
+    hides[0].style.display = "none";
+  }else{
+    hides[0].style.display = "initial";
+  }
 
   
+ if(email.value === ""){
+  hides[1].style.display = "initial";
+}
+else if(!emailregex.test(email.value)){
+  hides[1].style.display = "initial";
+}
+else{
+  hides[1].style.display = "none";
+}
+
+  if(password.value === ""){
+  hides[2].style.display = "initial";
+}
+else if(!passwordregex.test(password.value)){
+  hides[2].style.display = "initial";
+}
+else{
+  hides[2].style.display = "none";
+}
+})
